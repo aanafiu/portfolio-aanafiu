@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+    --color-navtext: #5ee9b5;
+  }
+
+.active-navlink{
+    text-decoration: underline;
+}
+
+.body-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* position: relative; */
+    width: 70px;
+    height:fit-content;
+    /* background-color: bisque; */
+}
+.left-bar{
+    height: 80px;
+    width: 15px;
+    background-color: rgba(0, 255, 255, 0.7);
+    animation-name: belowToUp;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3s;
+    /* animation-iteration-count: 1; */
+    animation-iteration-count: 1;
+    /* animation-play-state: paused; */
+    animation-fill-mode: forwards;
+    border-radius: 12px;
+    
+}
+.right-bar{
+    height: 80px;
+    width: 15px;
+    background-color: rgba(0, 255, 255, 0.7);
+    animation-name: belowToUp;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    /* animation-play-state: paused; */
+    animation-fill-mode: forwards;
+    border-radius: 12px;
+    
+}
+
+@keyframes belowToUp {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.center-bar{
+    /* height: 250px; */
+    width: 14px;
+    background-color: rgba(0, 255, 255, 0.9);
+    animation-name: rotateToUp;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+    border-radius: 6px;
+    /* animation-timing-function: cubic-bezier(.1, .1, 2, 1.2); */
+}
+.center-bar:hover{
+    animation-play-state: paused;
+}
+
+@keyframes rotateToUp {
+    0%{
+        transform: rotate(180deg);
+        height: 10px;
+        border: 5px solid #5ee9b5;
+    }
+    50%{
+        height: 50px;
+        height: 10px;
+        border: 10px solid #5ee9b5;
+    }
+    100%{
+        height: 80px;
+        rotate: -45deg;
+        border: 1px solid #5ee9b5;
+    }
+}
+

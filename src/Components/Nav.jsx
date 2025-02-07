@@ -1,59 +1,155 @@
-import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/logo.png";
+import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 import Loader from "./Loader/Loader";
 import { useEffect, useState } from "react";
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 
 const Nav = () => {
-    const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0); // Track previous scroll position
 
-    useEffect(() => {
-      const handleScroll = () => {
-        // Hide when scrolled past 10px
-        if (window.scrollY > 10) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-      
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > prevScrollY) {
+        setIsVisible(false); // Scrolling down, hide nav
+      } else {
+        setIsVisible(true); // Scrolling up, show nav
+      }
+      setPrevScrollY(window.scrollY); // Update the previous scroll position
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollY]); // Dependency array to ensure the scroll position is updated correctly
+
+  const scrollOffset = -130;
+
   return (
-    <div className="flex justify-between items-center mt-5 mb-10 w-full h-[120px] ">
-      <div className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-2000`}>
-        <Link to={"/"}>
-        <Loader></Loader>
+    <div className="flex flex-col sm:flex-row justify-between items-center mt-5 mb-10 w-full h-[120px]">
+      {/* Logo */}
+      <div
+        className={`w-full ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-500 flex justify-center items-center`}
+      >
+        <Link to="/">
+          <Loader />
         </Link>
       </div>
-      <div className="flex gap-5 justify-between bg-cyan-300/30 backdrop-blur-xs text-lg text-emerald-300 font-semibold h-[100px] items-center w-[60%] px-20 rounded-b-[200px] rounded-t-[500px] ">
-        <NavLink
-          to="/about"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active-navlink" : ""
-          }
+
+      {/* Mobile Menu Hamburger Icon */}
+      <div className="sm:hidden w-full flex justify-end items-start py-4 px-5">
+        {/* Hamburger Icon */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-cyan-500 font-semibold text-4xl"
+        >
+          {isMenuOpen ? <AiOutlineMenuUnfold /> : <AiOutlineMenuFold />}
+        </button>
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="hidden sm:flex gap-5 justify-between bg-cyan-300/30 backdrop-blur-xs text-lg text-emerald-300 font-semibold h-[100px] items-center w-full px-20 rounded-b-[200px] rounded-t-[500px]">
+        <ScrollLink
+          to="about"
+          smooth={true}
+          duration={500}
+          offset={scrollOffset}
+          className="cursor-pointer hover:text-green-400 transition"
         >
           About
-        </NavLink>
-        <NavLink to="/skills"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active-navlink" : ""
-          }>Skills</NavLink>
-        <NavLink to="/projects"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active-navlink" : ""
-          }>Projects</NavLink>
-        <NavLink to="/contact"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active-navlink" : ""
-          }>Contact</NavLink>
+        </ScrollLink>
+
+        <ScrollLink
+          to="skills"
+          smooth={true}
+          duration={500}
+          offset={scrollOffset}
+          className="cursor-pointer hover:text-green-400 transition"
+        >
+          Skills
+        </ScrollLink>
+
+        <ScrollLink
+          to="projects"
+          smooth={true}
+          duration={500}
+          offset={scrollOffset}
+          className="cursor-pointer hover:text-green-400 transition"
+        >
+          Projects
+        </ScrollLink>
+
+        <ScrollLink
+          to="contact"
+          smooth={true}
+          duration={500}
+          offset={scrollOffset}
+          className="cursor-pointer hover:text-green-400 transition"
+        >
+          Contact
+        </ScrollLink>
       </div>
-      <div className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-2000`}>
-        <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30">Download Resume</button>
+
+      {/* Download Resume Button (Desktop) */}
+      <div
+        className={`w-full text-right ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-500 hidden sm:block`}
+      >
+        <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30">
+          Download Resume
+        </button>
       </div>
+
+      {/* Mobile Menu Content */}
+      {isMenuOpen && (
+        <div className="sm:hidden w-full flex flex-col bg-black/80 text-navtext text-2xl gap-5 my-4">
+          <div className="flex flex-col gap-4 items-center">
+            <ScrollLink
+              to="about"
+              smooth={true}
+              duration={500}
+              offset={scrollOffset}
+              className="cursor-pointer hover:text-green-400 transition"
+            >
+              About
+            </ScrollLink>
+            <ScrollLink
+              to="skills"
+              smooth={true}
+              duration={500}
+              offset={scrollOffset}
+              className="cursor-pointer hover:text-green-400 transition"
+            >
+              Skills
+            </ScrollLink>
+            <ScrollLink
+              to="projects"
+              smooth={true}
+              duration={500}
+              offset={scrollOffset}
+              className="cursor-pointer hover:text-green-400 transition"
+            >
+              Projects
+            </ScrollLink>
+            <ScrollLink
+              to="contact"
+              smooth={true}
+              duration={500}
+              offset={scrollOffset}
+              className="cursor-pointer hover:text-green-400 transition"
+            >
+              Contact
+            </ScrollLink>
+          </div>
+
+          {/* Download Resume Button (Mobile) */}
+          <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30 mt-4">
+            Download Resume
+          </button>
+        </div>
+      )}
     </div>
   );
 };

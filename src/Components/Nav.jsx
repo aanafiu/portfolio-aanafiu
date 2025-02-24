@@ -32,7 +32,9 @@ const Nav = () => {
     <div className="flex flex-col sm:flex-row justify-between items-center mt-5 mb-10 w-full h-[120px]">
       {/* Logo */}
       <div
-        className={`w-full ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-500 flex justify-center items-center`}
+        className={`w-full ${
+          isVisible ? "opacity-100" : "opacity-0"
+        } transition-opacity duration-500 flex justify-center items-center`}
       >
         <Link to="/">
           <Loader />
@@ -95,11 +97,17 @@ const Nav = () => {
 
       {/* Download Resume Button (Desktop) */}
       <div
-        className={`w-full text-right ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-500 hidden sm:block`}
+        className={`w-full text-right ${
+          isVisible ? "opacity-100" : "opacity-0"
+        } transition-opacity duration-500 hidden sm:block`}
       >
-        <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30">
+        <a
+          className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30"
+          href="../../assets/Resume.pdf"
+          download
+        >
           Download Resume
-        </button>
+        </a>
       </div>
 
       {/* Mobile Menu Content */}
@@ -145,9 +153,13 @@ const Nav = () => {
           </div>
 
           {/* Download Resume Button (Mobile) */}
-          <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30 mt-4">
+          <a
+            className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30 mt-4 z-50"
+            href="../assets/Resume.pdf"
+            download
+          >
             Download Resume
-          </button>
+          </a>
         </div>
       )}
     </div>

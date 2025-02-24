@@ -1,4 +1,4 @@
-import myPic from "../../assets/mypic3.png";
+
 import SocialLinks from "../SocialLinks/SocialLinks";
 const AboutMe = () => {
   return (

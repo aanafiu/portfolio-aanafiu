@@ -29,7 +29,7 @@ const Banner = () => {
           </span>{" "}
         </div>
         <div className={`w-full my-5`}>
-        <button className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30">Download Resume</button>
+        <a className="text-navtext font-bold border-2 py-4 px-8 hover:bg-cyan-300/30" href="../../assets/Resume.pdf" download>Download Resume</a>
       </div>
       </div>
       <div className="w-[100%] h-[100%] flex justify-center items-center">
